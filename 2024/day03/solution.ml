@@ -1,5 +1,6 @@
 open Re
 
+(** Parse mul(x,y) and return x*y **)
 let parse_mul s =
   let ops =
     String.length s - 5 (* 'm', 'u', 'l', '(', '')' *)
@@ -11,25 +12,38 @@ let process regex line =
   try
     line |> Re.all regex
     |> List.map (fun m -> Group.get m 0)
-    |> List.map parse_mul |> List.fold_left ( + ) 0
+    |> List.fold_left
+         (fun (acc, status) x ->
+           match (status, x) with
+           | `enable, "don't()" -> (acc, `disable)
+           | `enable, "do()" -> (acc, `enable)
+           | `enable, s -> (acc + parse_mul s, `enable)
+           | `disable, "don't()" -> (acc, `disable)
+           | `disable, "do()" -> (acc, `enable)
+           | `disable, _ -> (acc, `disable))
+         (0, `enable)
+    |> fst
   with Not_found -> 0
 
 let answer =
   let r =
     Re.compile
       Re.(
-        seq
+        alt
           [
-            str "mul(";
-            repn digit 1 (Some 3);
-            str ",";
-            repn digit 1 (Some 3);
-            str ")";
+            seq
+              [
+                str "mul(";
+                repn digit 1 (Some 3);
+                str ",";
+                repn digit 1 (Some 3);
+                str ")";
+              ];
+            str "do()";
+            str "don't()";
           ])
   in
-  In_channel.fold_lines
-    (fun acc line -> acc + process r line)
-    0 In_channel.stdin
+  In_channel.input_lines In_channel.stdin |> String.concat "\n" |> process r
 
 let () = answer |> print_int
 
