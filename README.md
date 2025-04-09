@@ -23,3 +23,4 @@ Currently I mainly write solutions in *OCaml* for pracitce.
 | ----- | -----                                  | -------------------------------------- | -------------------------------- |
 | day01 | [solution](./2024/day01/solution.ml) |   | Simulation |
 | day02 | [solution](./2024/day02/solution.ml) |   | Simulation |
+| day03 | [solution](./2024/day03/solution.ml) |   | Regex |
