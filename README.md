@@ -13,7 +13,8 @@ Currently I mainly write solutions in *OCaml* for pracitce.
 ## 2025
 | Day   | Clojure          |
 | ----- | -----            |
-| day01 | [solution](./2025/day01/solution.clj) |
+| day01 | [part1](./2025/day01/solution1.clj); [part2](./2025/day01/solution2.clj) |
+
 
 ## 2024
 
