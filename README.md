@@ -14,6 +14,7 @@ Currently I mainly write solutions in *OCaml* for pracitce.
 | Day   | Clojure          |
 | ----- | -----            |
 | day01 | [part1](./2025/day01/solution1.clj); [part2](./2025/day01/solution2.clj) |
+| day02 | [part1](./2025/day02/solution1.clj); [part2](./2025/day02/solution2.clj) |
 
 
 ## 2024
